@@ -36,10 +36,17 @@ exp_W=expm(W*t);
 % --------------------------------------
 % Substitute specific values for analysis
  
-run_time=2
+%  绘制世界坐标系
+C_world=showWorldCoordinate(2);
+
+run_time=1
 
 % 1.rotation matrix
 R_data=eval(subs(R,t,run_time))
+
+C_body1=genCoordinateCoord(C_world,expandMatTo4Dim(R_data));
+showCoodinate(C_body1,'C_{body}',1)
+
 
 % 2.Derivative of a rotation matrix with respect to time (t)
 dR_data=eval(subs(dR,t,run_time))
@@ -53,17 +60,15 @@ exp_W_data=eval(subs(exp_W,t,run_time))
 
 % % 5.Axis angle (Log mapping)
 temp=logm(R_data);
-axisAngle=unHat(temp)
+vecAngle=unHat(temp)
 % 
 % % 6.Axis angle (rodrigues)
-[axis,angle]=rotMat2AxisAngle(R_data)
+[vec,angle]=rotMat2AxisAngle(R_data)
+
+axis equal
 
 
-
-
-
-
-
+ 
 
 
 

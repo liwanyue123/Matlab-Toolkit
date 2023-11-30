@@ -15,25 +15,71 @@ syms theta1(t) t real
 theta=2*t;
 
 % 1.rotation matrix
-R=calRotMatrix('Z',theta)
+R=calRotMatrix('Z',theta);
 
 % 2.Derivative of a rotation matrix with respect to time (t)
-dR=calDotRotMatrix(R)
+dR=calDotRotMatrix(R);
 
 % 3.Lie algebra
-W= simplify(R'*dR)
-w=unHat(W)
+W= simplify(R'*dR);
+w=unHat(W);
 
 % 4.Exp mapping
-exp_W=expm(W*t)
+exp_W=expm(W*t);
 
-% 5.Axis angle (Log mapp)
-exp_W=expm(W*t)
+% % 5.Axis angle (Log mapping)
+% logm(R)
+% 
+% % 6.Axis angle (rodrigues)
+% rotMat2AxisAngle(R)
 
-
+% --------------------------------------
 % Substitute specific values for analysis
+ 
+%  绘制世界坐标系
+C_world=showWorldCoordinate(2);
 
- eval(subs(R,t,2))
+run_time=2
+
+% 1.rotation matrix
+R_data=eval(subs(R,t,run_time))
+
+C_body1=genCoordinateCoord(C_world,expandMatTo4Dim(R_data));
+showCoodinate(C_body1,'C_{body}',1)
+
+
+% 2.Derivative of a rotation matrix with respect to time (t)
+dR_data=eval(subs(dR,t,run_time))
+
+% 3.Lie algebra
+W_data=eval(subs(W,t,run_time))
+w_data=unHat(W_data)
+
+% 4.Exp mapping
+exp_W_data=eval(subs(exp_W,t,run_time))
+
+% % 5.Axis angle (Log mapping)
+temp=logm(R_data);
+axisAngle=unHat(temp)
+% 
+% % 6.Axis angle (rodrigues)
+[axis,angle]=rotMat2AxisAngle(R_data)
+
+
+
+
+
+axie equal
+
+
+
+
+
+
+
+
+
+
 
 
 % % %  绘制世界坐标系
