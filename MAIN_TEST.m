@@ -1,0 +1,55 @@
+addpath(genpath("TwistCalculation"));%旋量相关
+addpath(genpath("Coordinate"));%计算显示坐标系相关
+addpath(genpath("Matrix"));%矩阵相关
+addpath(genpath("Utils"));%矩阵相关
+addpath(genpath("simple"));%符号处理相关
+
+addpath(genpath("SphereTools"));%
+
+clear
+
+
+% %  绘制世界坐标系
+% C_world=showWorldCoordinate( 1 );
+% dt=0.1;
+% omega=2;
+% angle1=10;
+% angle2=angle1+omega*dt;
+% %只要限制只有z轴能选择，那么就是SO(2),我们依旧以三维的视角观察它
+% T1=calRotMatrix('Z',deg2rad(angle1));
+% T2=calRotMatrix('Z',deg2rad(angle2));
+% %画坐标系
+% C_body1=genCoordinateCoord(C_world,T1);
+% showCoodinate(C_body1,'C_{body}',1)
+% C_body2=genCoordinateCoord(C_world,T2);
+% showCoodinate(C_body2,'C_{body}',1)
+% 
+% R1=T1(1:3,1:3)
+% R2=T2(1:3,1:3)
+% 
+% W1 = logm(R1)%对数映射出李代数
+% w1=  unHat(W1)%从李代数提取旋转向量
+% 
+% W2 = logm(R2)%对数映射出李代数
+% w2=  unHat(W2)%从李代数提取旋转向量
+
+
+%分析轴角
+% angle1=30;
+% T1=calRotMatrix('Z',deg2rad(angle1));
+% R1=T1(1:3,1:3)
+% v=unHat(logm(R1))
+% rad2deg(v(3))
+% %计算角速度
+% 
+% rodrigues([0;0;1],pi/6)
+
+v=[0;0;pi/6]
+expm(hat(v))
+
+
+
+
+% show_w(w)%画出旋转向量
+% theta=norm(w)%旋转角度
+% u=w/theta;%旋转单位向量
