@@ -19,7 +19,6 @@ end
 
 function [R] = calTranMatrix_sym (dis1,dis2,dis3)
 
- 
 if dis1(1)=='-'
     x = sym(dis1(2:end))*(-1);
 else

@@ -10,25 +10,22 @@ end
 function [R1] = calRotMatrix_num(axis,theta)
 
 if isempty(theta)
-    error="thetaΪ��!!!!!!!"
+    error="theta is empty!!!!!!!"
 end
 c = cos(theta);
 s = sin(theta);
 
-Rx = [1,0,0,0;
-    0,c,-s,0;
-    0,s,c,0;
-    0,0,0,1];
+Rx = [1,0,0;
+    0,c,-s;
+    0,s,c;];
 
-Ry = [c,0,s,0;
-    0,1,0,0;
-    -s,0,c,0;
-    0,0,0,1];
+Ry = [c,0,s;
+    0,1,0;
+    -s,0,c;];
 
-Rz = [c,-s,0,0;
-    s,c,0,0;
-    0,0,1,0;
-    0,0,0,1];
+Rz = [c,-s,0;
+    s,c,0;
+    0,0,1;];
 
 R1 = eye(4);
 
@@ -55,20 +52,17 @@ end
 c = sym(cos(t));
 s = sym(sin(t));
 
-Rx = [1,0,0,0;
-    0,c,-s,0;
-    0,s,c,0;
-    0,0,0,1];
+Rx = [1,0,0;
+    0,c,-s;
+    0,s,c;];
 
-Ry = [c,0,s,0;
-    0,1,0,0;
-    -s,0,c,0;
-    0,0,0,1];
+Ry = [c,0,s;
+    0,1,0;
+    -s,0,c;];
 
-Rz = [c,-s,0,0;
-    s,c,0,0;
-    0,0,1,0;
-    0,0,0,1];
+Rz = [c,-s,0;
+    s,c,0;
+    0,0,1;];
 
 R1 = eye(4);
 

@@ -1,4 +1,4 @@
-function [R1] = calRotMatrix(axis,theta)
+function [R1] = calTranMatrixFromR(axis,theta)
 global isSym
 if(isSym)
     R1=calRotMatrix_syms(axis,theta);
@@ -10,7 +10,7 @@ end
 function [R1] = calRotMatrix_num(axis,theta)
 
 if isempty(theta)
-    error="thetaΪ��!!!!!!!"
+    error="theta is empty!!!!!!!"
 end
 c = cos(theta);
 s = sin(theta);
