@@ -6,13 +6,13 @@ t=Twist(1:3)*rate;
 f=Twist(4:6)*rate;
 
 if(show=="all")
-    circleArrow(pot ,t,norm_max_tau,color) ;
-    lineArrow(pot,f ,color);
+    drawCircleArrow(pot ,t,norm_max_tau,color) ;
+    drawLineArrow(pot,f ,color);
 elseif(show=="t")
-    circleArrow(pot ,t,norm_max_tau,color) ;
+    drawCircleArrow(pot ,t,norm_max_tau,color) ;
 
 elseif(show=="f")
-    lineArrow(pot,f ,color);
+    drawLineArrow(pot,f ,color);
 elseif(show=="null")
 end
 
