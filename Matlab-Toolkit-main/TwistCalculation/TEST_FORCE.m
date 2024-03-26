@@ -15,11 +15,11 @@ showWorldCoordinate(1)
 % p_B=[0;0;0];
 % r_BA=p_A-p_B%force arm
 % hat(r_BA)*[4;0;0]
- 
+% 
 % 
 % F_B=calScrewFromOtherScrew(F_A,r_BA)
 % hold on
-% drawVector(p_B, r_BA)
+% drawLineArrow(p_B, r_BA,'grey')
 % showScrew(p_A,F_A ,showType,rate,'blue',norm_max_tau)
 % showScrew(p_B,F_B ,showType,rate,'red',norm_max_tau)
 
@@ -29,13 +29,15 @@ showWorldCoordinate(1)
 
 p_B=[0;0;0]; 
 tau_B=[8;0;0];
-showScrew(p_B,[tau_B;0;0;0] ,showType,rate,'red',norm_max_tau)
+showScrew(p_B,[tau_B;0;0;0] ,showType,rate,'red',norm_max_tau,'B')
 
 
 p_A = [0; 2; 0];
 r_AB=p_B-p_A;
+drawLineArrow(p_A, r_AB,'grey')
 f_A=hat(r_AB)*tau_B
-showScrew(p_A,[0;0;0;f_A] ,showType,rate,'blue',norm_max_tau)
+
+showScrew(p_A,[0;0;0;f_A] ,showType,rate,'blue',norm_max_tau,'A')
 
 
 % 设置相机的角度

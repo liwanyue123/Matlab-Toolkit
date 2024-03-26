@@ -17,8 +17,12 @@ end
 
 function orthogonal_vector = findOrthogonalVector(normal)
 % 生成一个随机向量
-random_vector = rand(1, 3);
-
+% random_vector = rand(1, 3);
+random_vector=[1,2,3];
+if(normal==random_vector)
+    random_vector=[1,3,4];
+end
+random_vector=random_vector/norm(random_vector);
 % 使用叉乘找到与给定向量垂直的向量
 orthogonal_vector = cross(normal, random_vector);
 end
