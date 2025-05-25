@@ -7,7 +7,7 @@ function [C_Root] = showWorldCoordinate(rate)
 [C_Root.p0,C_Root.x1,C_Root.y1,C_Root.z1]=deal(p0,x1,y1,z1);%建立一个坐标系C_Root
 
  
-showCoodinate(C_Root,"World",rate)
+showCoordinate(C_Root,"World",rate)
 
 
 hold on;

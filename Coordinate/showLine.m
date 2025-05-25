@@ -1,4 +1,4 @@
-function [] = showLine(AxisList, line, color)
+function [] = showLine(AxisList, line, color, lineWidth)
 % showLine - 在三维空间中绘制点序列首尾相连的线段
 %
 % 输入参数：
@@ -24,7 +24,7 @@ for i = 1:n-1
     x = [p0.X, p1.X];
     y = [p0.Y, p1.Y];
     z = [p0.Z, p1.Z];
-    plot3(x, y, z, line, 'Color', color);
+    plot3(x, y, z, line, 'Color', color, 'LineWidth', lineWidth);
     hold on;
 end
 end

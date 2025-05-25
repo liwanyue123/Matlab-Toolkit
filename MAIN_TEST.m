@@ -26,11 +26,11 @@ T_w3=T_w1*T_12*T_23;
 %画坐标系
 C_world=showWorldCoordinate( 1 );%  绘制世界坐标系
 C_body1=genCoordinateCoord(C_world,T_w1);
-showCoodinate(C_body1,'C_{body1}',1)
+showCoordinate(C_body1,'C_{body1}',1)
 C_body2=genCoordinateCoord(C_world,T_w2);
-showCoodinate(C_body2,'C_{body2}',1)
+showCoordinate(C_body2,'C_{body2}',1)
 C_body3=genCoordinateCoord(C_world,T_w3);
-showCoodinate(C_body3,'C_{body3}',1)
+showCoordinate(C_body3,'C_{body3}',1)
 
 % 构造坐標系首尾相連线段
 lineList = [C_world.p0, C_body1.p0, C_body2.p0, C_body3.p0];
