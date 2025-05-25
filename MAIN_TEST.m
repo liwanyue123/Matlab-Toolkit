@@ -1,4 +1,5 @@
-addpath(genpath("TwistCalculation"));%旋量相关
+addpath(genpath("TwistCalculation/twistAndScrew"));%旋量相关
+addpath(genpath("TwistCalculation/drawPic"));%旋量相关
 addpath(genpath("Coordinate"));%计算显示坐标系相关
 addpath(genpath("Matrix"));%矩阵相关
 addpath(genpath("Utils"));%矩阵相关
@@ -8,8 +9,8 @@ addpath(genpath("SphereTools"));%
 
 clear
 
-angle1=0;
-angle2=0;
+angle1=45;
+angle2=45;
 l1=2;
 l2=2;
 l3=2;
@@ -53,10 +54,14 @@ J2=S_32;
 J1=S_31;
 J=[J1,J2];
 
+% world系
+F_w=generateNormTwsit('Z', 'Prismatic')*10;
+% 转成末端坐标系   
+T_3w=inv(T_w3) ;
+X_3w=calAdjointMatFromT(T_3w,'V');
+F_f=X_3w*F_w
 
-F=generateNormTwsit('Z', 'Prismatic')*10;
-
-transpose(J)*F;
+tau=transpose(J)*F_f % 转的也是关节局部坐标系
 
 view(3) 
 axis equal
