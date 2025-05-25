@@ -8,116 +8,56 @@ addpath(genpath("SphereTools"));%
 
 clear
 
-
-syms theta1(t) t real
-
-
-theta=2*t;
-
-% 1.rotation matrix
-R=calRotMatrix('Z',theta);
-
-% 2.Derivative of a rotation matrix with respect to time (t)
-dR=calDotRotMatrix(R);
-
-% 3.Lie algebra
-W= simplify(R'*dR);
-w=unHat(W);
-
-% 4.Exp mapping
-exp_W=expm(W*t);
-
-% % 5.Axis angle (Log mapping)
-% logm(R)
-% 
-% % 6.Axis angle (rodrigues)
-% rotMat2AxisAngle(R)
-
-% --------------------------------------
-% Substitute specific values for analysis
+angle1=0;
+angle2=0;
+l1=2;
+l2=2;
+l3=2;
  
-%  绘制世界坐标系
-C_world=showWorldCoordinate(2);
+R1=calTranMatrixFromR('Y',deg2rad(angle1));
+R2=calTranMatrixFromR('Y',deg2rad(angle2));
+T_w1=calTranMatrixFromP([l1,0,0])*R1;
+T_12=calTranMatrixFromP([l2,0,0])*R2;
+T_23=calTranMatrixFromP([l3,0,0]);
+T_w2=T_w1*T_12;
+T_w3=T_w1*T_12*T_23;
 
-run_time=1
+%画坐标系
+C_world=showWorldCoordinate( 1 );%  绘制世界坐标系
+C_body1=genCoordinateCoord(C_world,T_w1);
+showCoodinate(C_body1,'C_{body1}',1)
+C_body2=genCoordinateCoord(C_world,T_w2);
+showCoodinate(C_body2,'C_{body2}',1)
+C_body3=genCoordinateCoord(C_world,T_w3);
+showCoodinate(C_body3,'C_{body3}',1)
 
-% 1.rotation matrix
-R_data=eval(subs(R,t,run_time))
-
-C_body1=genCoordinateCoord(C_world,expandMatTo4Dim(R_data));
-showCoodinate(C_body1,'C_{body}',1)
+% 构造坐標系首尾相連线段
+lineList = [C_world.p0, C_body1.p0, C_body2.p0, C_body3.p0];
+showLine(lineList, '-', 'b');
 
 
-% 2.Derivative of a rotation matrix with respect to time (t)
-dR_data=eval(subs(dR,t,run_time))
+X_23=calAdjointMatFromT(T_23,'V');
+X_13=calAdjointMatFromT(T_12*T_23,'V');
+% 可以用转置和负组合，而不用取逆
+X_32=inv(X_23) ;
+X_31=inv(X_13) ;
 
-% 3.Lie algebra
-W_data=eval(subs(W,t,run_time))
-w_data=unHat(W_data)
+% 计算雅可比矩阵 
+S2=generateNormTwsit('Y', 'Rotational');
+S1=generateNormTwsit('Y', 'Rotational');
+% 得到末端点处的关节旋量场的值
+S_32=X_32*S2;
+S_31=X_31*S1;
+% 雅可比每一列就是他们
+J2=S_32;
+J1=S_31;
+J=[J1,J2];
 
-% 4.Exp mapping
-exp_W_data=eval(subs(exp_W,t,run_time))
 
-% % 5.Axis angle (Log mapping)
-temp=logm(R_data);
-vecAngle=unHat(temp)
-% 
-% % 6.Axis angle (rodrigues)
-[vec,angle]=rotMat2AxisAngle(R_data)
+F=generateNormTwsit('Z', 'Prismatic')*10;
 
+transpose(J)*F;
+
+view(3) 
 axis equal
 
-
- 
-
-
-
-
-
-
-
-
-
-
-
-% % %  绘制世界坐标系
-% C_world=showWorldCoordinate( 1 );
-% dt=0.1;
-% omega=2;
-% angle1=10;
-% angle2=angle1+omega*dt;
-% %只要限制只有z轴能选择，那么就是SO(2),我们依旧以三维的视角观察它
-% T1=calRotMatrix('Z',deg2rad(angle1));
-% T2=calRotMatrix('Z',deg2rad(angle2));
-% %画坐标系
-% C_body1=genCoordinateCoord(C_world,T1);
-% showCoodinate(C_body1,'C_{body}',1)
-% C_body2=genCoordinateCoord(C_world,T2);
-% showCoodinate(C_body2,'C_{body}',1)
-
-% R1=T1(1:3,1:3)
-% R2=T2(1:3,1:3)
-% 
-% W1 = logm(R1)%对数映射出李代数
-% w1=  unHat(W1)%从李代数提取旋转向量
-% 
-% W2 = logm(R2)%对数映射出李代数
-% w2=  unHat(W2)%从李代数提取旋转向量
-
-
-%分析轴角
-% angle1=30;
-% T1=calRotMatrix('Z',deg2rad(angle1));
-% R1=T1(1:3,1:3)
-% v=unHat(logm(R1))
-% rad2deg(v(3))
-% %计算角速度
-% 
-% rodrigues([0;0;1],pi/6)
-
-
-
-
-% show_w(w)%画出旋转向量
-% theta=norm(w)%旋转角度
-% u=w/theta;%旋转单位向量
