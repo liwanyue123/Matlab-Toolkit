@@ -34,7 +34,7 @@ showCoordinate(C_body3,'C_{body3}',1)
 
 % 构造坐標系首尾相連线段
 lineList = [C_world.p0, C_body1.p0, C_body2.p0, C_body3.p0];
-showLine(lineList, '-', 'b');
+showLine(lineList, '-', 'b',1);
 
 
 X_23=calAdjointMatFromT(T_23,'V');
