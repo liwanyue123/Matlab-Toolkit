@@ -4,3 +4,5 @@ show_G1_mesh 在G1_frame_whole_add_joint的基础上除了可视化骨架坐标�
 
 IK_final 动态展示单腿雅可比计算的逆运动学
 ![image](https://github.com/user-attachments/assets/8ab70e9d-3d76-46eb-ba48-40d0f90f5554)
+
+test_jacobian_batch_warm pytorch 并行计算4096个env 逆运动学
