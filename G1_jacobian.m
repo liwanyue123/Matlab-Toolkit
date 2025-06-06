@@ -108,8 +108,6 @@ function [theta_sol, success] = numericIK(leg_struct, x_desired, max_iter, tol)
     success = false;
 end
 
-
-
 % foot 三个分支变换矩阵（共用）
 T_foot_front = [1 0 0 0.180; 0 1 0 0; 0 0 1 -0.060; 0 0 0 1];
 T_foot_mid   = [1 0 0 0.000; 0 1 0 0; 0 0 1 -0.060; 0 0 0 1];
