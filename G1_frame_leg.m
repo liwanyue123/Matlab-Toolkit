@@ -50,20 +50,20 @@ C_world = showWorldCoordinate(0.1);
 
 % 左腿主链
 [lineList_left, T_left_foot] = drawLeg(T_list_left, eye(4), C_world, 'L', 'b');
-
-% 左脚三趾
-for i = 1:length(T_foot)
-    [~, ~] = drawLeg({T_foot{i}}, T_left_foot, C_world, sprintf('L_f%d', i), 'b');
-end
-
-% 右腿主链
-[lineList_right, T_right_foot] = drawLeg(T_list_right, eye(4), C_world, 'R', 'r');
-
-% 右脚三趾
-for i = 1:length(T_foot)
-    [~, ~] = drawLeg({T_foot{i}}, T_right_foot, C_world, sprintf('R_f%d', i), 'm');
-end
-
+% 
+% % 左脚三趾
+% for i = 1:length(T_foot)
+%     [~, ~] = drawLeg({T_foot{i}}, T_left_foot, C_world, sprintf('L_f%d', i), 'b');
+% end
+% 
+% % 右腿主链
+% [lineList_right, T_right_foot] = drawLeg(T_list_right, eye(4), C_world, 'R', 'r');
+% 
+% % 右脚三趾
+% for i = 1:length(T_foot)
+%     [~, ~] = drawLeg({T_foot{i}}, T_right_foot, C_world, sprintf('R_f%d', i), 'm');
+% end
+p=T_left_foot(1:3,4)
 % 美化显示
 view(3);
 axis equal;

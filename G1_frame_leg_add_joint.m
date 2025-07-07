@@ -52,7 +52,7 @@ T_foot = {T_foot_front, T_foot_mid, T_foot_hind};
 % 左腿
 leg_left = struct(...
     'type', {'Y','X','Z','Y','Y','X'}, ...
-    'theta', {0, 0, 0, 0, 0, 0}, ...
+    'theta', { -1.127, -0.003,  0.012,  1.336, -0.210,  0.011}, ...
     'name', {'hip_{pitch}','hip_{roll}','hip_{yaw}','knee','ankle_{pitch}','ankle_{roll}'}, ...
     'T', {...
         [ 1 0 0 0; 0 1 0 0.064452; 0 0 1 -0.102700; 0 0 0 1],...
@@ -69,7 +69,7 @@ leg_left = struct(...
 % 右腿
 leg_right = struct(...
     'type', {'Y','X','Z','Y','Y','X'}, ...
-    'theta', {0, 0, 1.57, 0, 0, 0}, ...
+    'theta', {0, 0, 0, 0, 0, 0}, ...
     'name', {'hip_{pitch}','hip_{roll}','hip_{yaw}','knee','ankle_{pitch}','ankle_{roll}'}, ...
     'T', {...
         [ 1 0 0 0; 0 1 0 -0.064452; 0 0 1 -0.102700; 0 0 0 1],...
@@ -87,22 +87,24 @@ C_world = showWorldCoordinate(0.1);
 
 % 左腿主链
 [lineList_left, T_left_foot]  = drawLegJoint(leg_left, eye(4), C_world, 'L', 'b');
-
-% 左脚三趾
-for i = 1:length(T_foot)
-    [~, ~] = drawLeg({T_foot{i}}, T_left_foot, C_world, sprintf('L_{f%d}', i), 'b');
-end
-
-% 右腿主链
-[lineList_right, T_right_foot]= drawLegJoint(leg_right, eye(4), C_world, 'R', 'r');
-
-% 右脚三趾
-for i = 1:length(T_foot)
-    [~, ~] = drawLeg({T_foot{i}}, T_right_foot, C_world, sprintf('R_{f%d}', i), 'r');
-end
+% 
+% % 左脚三趾
+% for i = 1:length(T_foot)
+%     [~, ~] = drawLeg({T_foot{i}}, T_left_foot, C_world, sprintf('L_{f%d}', i), 'b');
+% end
+% 
+% % 右腿主链
+% [lineList_right, T_right_foot]= drawLegJoint(leg_right, eye(4), C_world, 'R', 'r');
+% 
+% % 右脚三趾
+% for i = 1:length(T_foot)
+%     [~, ~] = drawLeg({T_foot{i}}, T_right_foot, C_world, sprintf('R_{f%d}', i), 'r');
+% end
 
 % 美化显示
 % figure('Position', [100, 100, 800, 600]);  % 左下角(x,y), 宽, 高
 view(37.5, 30);   % 默认 3D 视角
 axis equal;
 title('Left and Right Leg Kinematic Chain Visualization');
+
+[0,0.064,-0.1]+[ 0.242,  0.049, -0.456]
